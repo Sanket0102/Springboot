@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<link rel = "stylesheet" th:href = "@{/css/style.css}"/>
+<title>Insert title here</title>
+<script th:src = "@{/javascript/myjs.js}"></script>
+</head>
+	<body>
+		<section class = "banner text-white d-flex justify-content-center align-items-center">
+			  <div class = "text-center">
+			    <h1 class = "font-weight-bold">Contact Hub</h1>
+			    <br>
+			
+	
+			
+				<a th:href = "@{/signup}" class = "btn btn-lg btn-primary">Get Started</a>
+			  </div>
+		</section>
+		
+	</body>
+</html>

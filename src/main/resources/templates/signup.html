@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<link rel = "stylesheet" th:href = "@{/css/style.css}"/>
+<title th:text ="${signuptitle}" ></title>
+
+<script th:src = "@{/javascript/myjs.js}"></script>
+</head>
+	<body>
+		<section >
+			  <div class = "container-fluid">
+			       <div class = "row">
+			           <div class = "col-md-8 offset-md-2">
+			               <h1 class = "text-center ">Register Here</h1>
+			               <div class = "container-fluid">
+			                   <div th:if = "${session.message}" th:classappend = "${session.message.type}" class = "alert " role = "alert">
+			                         <p th:text = "${session.message.content}" ></p>
+			                         
+			                         
+			                         
+			                   </div>
+			                   <form novalidate action = "" th:action = "@{/register}" method = "post" th:object="${user}">
+			                      <div class="form-group mt-2">
+								    <label for="exampleInputName">Your Name</label>
+								    <input name = "username" th:value = "${user.username}" type="text" 
+								           th:classappend = "${#fields.hasErrors('username') ? 'is-invalid':''}" 
+								           class="form-control " id="exampleInputName" placeholder="Your Name">
+								    <div class = "invalid-feedback" th:each = "e:${#fields.errors('username')}" th:text = "${e}" id = "validationServer03Feedback">
+								    
+								    </div>
+								  </div>
+								 <div class="form-group mt-2">
+								    <label for="exampleInputEmail1">Email address</label>
+								    <input name = "useremail" th:value = "${user.useremail}" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+								    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+								  </div>
+								  <div class="form-group mt-2">
+								    <label for="exampleInputPassword1">Password</label>
+								    <input name = "userpassword" th:value = "${user.userpassword}" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+								  </div>
+								  <div class="form-group mt-2">
+								  	<label for ="exampleTextArea">Description</label>
+								     <textarea name = "description" th:value = "${user.description}" id = "exampleTextArea" placeholder = "Enter something yourself" rows = "10" class = "form-control"></textarea>
+								  </div>
+								  
+								  <div class="form-check mt-2">
+								    <input name = "agreement" type="checkbox" class="form-check-input" id="exampleCheck1">
+								    <label class="form-check-label" for="exampleCheck1">Agree terms & condition</label>
+								  </div>
+								  
+								  <div class = "container text-center">
+								      <button type="submit" class="btn btn-primary mt-2 mr-2">Submit</button>
+								      <button type="submit" class="btn btn-primary mt-2 ml-2">Reset Form</button>
+								  </div>
+								  
+								  
+								  
+								  
+			                   </form>
+			               </div>
+			           </div>
+			       </div>
+			  </div>
+		</section>
+		
+	</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html >
+<html xmlns:th = "https://www.springframework.org"
+      th:replace = "user/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <section>
+          <div class = "container">
+               <div class="card" style="width: 18rem;">
+				  <div class="card-body">
+				    <h5 class="card-title">My Profile</h5>
+				    <h6 class="card-subtitle mb-2 text-muted">Name : <span th:text = "${user.getUsername()}"></span></h6>
+				    <h6 class="card-subtitle mb-2 text-muted">Name : <span th:text = "${user.getUseremail()}"></span></h6>
+				    
+				    <p class="card-text" th:text = "${user.getDescription()}"></p>
+				    <a th:href="@{/user/userdashboard}" class="card-link">Go To Dashboard</a>
+				    
+				  </div>
+				</div>
+          </div>
+    </section>
+</body>
+</html>

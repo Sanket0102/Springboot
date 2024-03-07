@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th = "https://www.thymeleaf.org"
+            th:replace = "user/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>View Contact | Contact Hub</title>
+</head>
+<body>
+  <section>
+     <div class = "text-center ml-3 mr-3">
+     	<h2>Your Saved Contact List is Here.. </h2>
+     	      <div th:if = "${session.message1}" class = "container">
+	          	<div th:classappend = "${session.message1.type}" class="alert " role="alert">
+	  				<span th:text = "${session.message1.content}"></span>
+				</div>  
+			  </div>
+			  
+			 
+     </div>
+     <div class = "mr-auto mt-4 mb-4">
+                 <form class = "m-3" th:action = "@{'/user/view-contact/sort-az/'+${page}}">
+				 	<button class = "btn btn-primary">Sort A-Z</button>
+				 </form>
+				 <form class = "m-3" th:action = "@{'/user/view-contact/sort-za/'+${page}}">
+				    <button class = "btn btn-primary">Sort Z-A</button>
+				 </form>
+	 </div>
+			 
+     <div class = "text-center ml-3 mr-3">
+     	<table class="table table-striped">
+		  <thead>
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">Name</th>
+		      <th scope="col">NickName</th>
+		      <th scope="col">Email</th>
+		      <th scope="col">Mobile No</th>
+		      <th scope="col">Work</th>
+		      <th scope="col">Address</th>
+		      <th scope="col">Action</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr th:each = "c:${contactlist}">
+		      <th scope="row" th:text = "${c.contactid}"></th>
+		      <td >
+		        <img class = "my_profile_picture" th:src = "@{'/image/'+${c.contactimageurl}}" alt="">
+		        <span th:text = "${c.contactname}"> </span></td>
+		      <td th:text = "${c.secondname}"></td>
+		      <td th:text = "${c.email}"></td>
+		      <td th:text = "${c.phone}"></td>
+		      <td th:text = "${c.work}"></td>
+		      <td th:text = "${c.address}"></td>
+		      <td>
+		         <a th:href = "@{'/user/delete/'+${c.contactid}}" class = "btn btn-danger">Delete</a>
+		         
+		         <form th:action = "@{'/user/update/'+${c.contactid}}" method = "post">
+		             <button class = "btn btn-warning">Update</button>
+		         </form>
+		      </td>
+		      
+		    </tr>
+		   
+		  </tbody>
+		</table>
+     </div>
+     <nav th:if = "${totalpages > 1} == true" aria-label="Page navigation example">
+	  <ul class="pagination">
+	    <li th:if = "${currentpage != 0}" class="page-item"><a class="page-link" th:href="@{'/user/view-contact/'+${currentpage-1}}">Previous</a></li>
+	    <li class="page-item" th:classappend = "${currentpage == i-1 ? 'active':''}" th:each = "i : ${#numbers.sequence(1,totalpages)}"><a class="page-link" th:href="@{'/user/view-contact/'+${i-1}}"><span th:text = "${i}"></span></a></li>
+	    
+	    <li th:if = "${currentpage+1 != totalpages}" class="page-item"><a th:href="@{'/user/view-contact/'+${currentpage+1}}" class="page-link" href="#">Next</a></li>
+	  </ul>
+	</nav>
+  </section>
+</body>
+</html>
